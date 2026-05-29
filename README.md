@@ -22,10 +22,12 @@ Everything runs locally; nothing leaves your Mac.
 
 ## Build
 ```sh
-./build.sh            # builds Wren.app from the shared core
+./build.sh            # builds Wren.app from the shared core (latest main)
 ```
-The shared code lives in the [`core`](https://github.com/thousandflowers/Parrot) submodule
-(the Parrot codebase); Wren and Parrot are one codebase, two products selected by bundle identity.
+The shared code lives in the [`core`](https://github.com/thousandflowers/Parrot) submodule, which
+**tracks `main`**. `build.sh` runs `git submodule update --remote`, so **one commit to the core
+(Parrot repo) updates both Parrot and Wren** — no per-app pointer bump. Wren and Parrot are one
+codebase, two products selected by bundle identity (`com.thousandflowers.wren` → AppMode.wren).
 
 ## Sibling
 - [**Parrot**](https://github.com/thousandflowers/Parrot) — grammar & fluency correction for macOS.
