@@ -6,7 +6,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 echo "[*] Syncing core submodule to latest main (one-commit core updates propagate here)..."
-git submodule update --init --recursive --remote core
+git submodule update --init --recursive core
 
 echo "[*] Building via core/build-app.sh..."
 ( cd core && ./build-app.sh "${1:-release}" )
