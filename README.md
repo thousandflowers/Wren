@@ -76,3 +76,7 @@ swift build
 - macOS 14.0+
 - Apple Silicon or Intel Mac
 - ~2 GB free RAM for the local model (shared with Parrot if both installed)
+
+## License
+
+[Source-available](LICENSE). Free for personal, non-commercial use. Commercial use requires a paid license.
