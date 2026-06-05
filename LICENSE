@@ -1,35 +1,21 @@
-Copyright © 2025 thousandflowers
+MIT License
 
-## Wren License Agreement
+Copyright (c) 2025 thousandflowers
 
-Wren is source-available software. The source code is publicly visible for
-transparency, education, and personal use.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-### ✅ Free Use — Personal, Non-Commercial
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-You may use, modify, and run Wren free of charge if all of the following apply:
-
-- You are an individual using Wren for your own personal purposes; and
-- You do not use Wren in connection with any commercial activity or revenue
-  generation (including but not limited to: employment, contracting, consulting,
-  or operating a business).
-
-### 🚫 Commercial Use Requires a License
-
-If you or your organization use Wren as part of any commercial activity — including
-but not limited to:
-
-- Using Wren while performing work for an employer or client;
-- Using Wren within a company, non-profit, government agency, or any legal entity;
-- Building products or services that incorporate or depend on Wren;
-
-you must obtain a paid commercial license. Contact thousandflowers for licensing terms.
-
-### Disclaimer
-
-THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
-ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
