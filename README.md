@@ -1,13 +1,12 @@
 # Wren 🐦
 
-**Instant, on-device inline completion for every macOS app.** As you type, Wren suggests the next words in grey — press **Tab** to accept. It also fixes typos in the word you just typed. Everything runs locally; nothing leaves your Mac.
+**Instant, on-device inline completion for every macOS app.** As you type, Wren suggests the next words in grey — press **Tab** to accept. It also fixes typos in the word you just typed. **Everything runs on your Mac by default; nothing leaves your machine.** Wren can optionally use an OpenAI-compatible API if you prefer a cloud model, but this is entirely opt-in — no setup, no cloud dependency out of the box.
 
 ## Features
 
 - **Inline completion** — predictive ghost text in any text field, accept with Tab.
 - **Typo fix on Tab** — misspelled last word? Tab corrects it (on-device spell check).
 - **Custom accept keys** — choose your own keys for partial (word-by-word) and full (entire suggestion) accept.
-- **OpenAI-compatible endpoint** — use cloud models for completion (OpenAI, Ollama, or any OpenAI-compatible API).
 - **Screen context** — reads on-screen text above the caret via local OCR (the conversation or email you are replying to) so suggestions fit, not random. Automatically crops out your input field to prevent feedback loops.
 - **Personalization** — optional style instructions (e.g. "friendly and concise") with a strength slider so suggestions match your voice.
 - **Style profiling** — Wren learns your writing fingerprint (formality, vocabulary, sentence length) from accepted completions and steers the model toward your natural voice.
@@ -17,6 +16,8 @@
 - **Corpus seeding** — import your own writing (emails, notes) to seed the learning store with your voice from day one.
 - **On-device LLM** — llama.cpp running locally (a small base model); the app process itself stays tiny because the model runs in a dedicated helper subprocess and is memory-mapped (shared with Parrot if both installed — one copy of the weights in RAM).
 - **Hallucination guard** — topic-drift rejection prevents the model from suggesting off-topic content; post-context overlap rejection filters stale OCR garbage.
+
+> **Cloud?** Wren includes a built-in model and runs fully on-device with zero configuration. An OpenAI-compatible endpoint (OpenAI, Ollama, or any provider) can be enabled manually in Settings → Completion → Model — this is **strictly opt-in**. The default, recommended path never touches the network.
 
 ## Permissions
 
