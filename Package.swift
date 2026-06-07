@@ -64,10 +64,7 @@ let package = Package(
                 "build-app.sh",
                 "Parrot.app",
                 "Wren.app",
-                "Canary.app",
-                "graphify-out",
                 "docs",
-                "Parrot_0.9.1.zip",
                 "scripts",
                 "Casks",
                 "CONTRIBUTING.md",
@@ -77,7 +74,12 @@ let package = Package(
                 "Resources/Localizable.xcstrings",
                 "Resources/Parrot-MAS.entitlements",
                 "CLlama",
-                "CompletionHelper"
+                "CompletionHelper",
+                "Resources/MenuIcon@2x.png",
+                "Resources/MenuIcon.png",
+                "Resources/AppIcon.icns",
+                "build-wren.sh",
+                "Package.resolved",
             ],
             linkerSettings: [
                 .unsafeFlags(["-Xlinker", "-rpath", "-Xlinker", "@executable_path/../Frameworks"])
