@@ -4,6 +4,16 @@
 
 **No subscription. No account. No cloud. Just download and type.**
 
+---
+
+## Why I built this
+
+I wanted to replace Cotypist — the inline completion app I was using — with something better. But the real insight came from Parrot: I was already collecting data about how I write, what corrections I accept, what I reject. That data was sitting locally on my Mac, doing nothing after a correction was applied.
+
+Wren is what happens when you take that data and use it for prediction instead of correction. Same model, same local inference, same privacy — but pointing forward instead of backward.
+
+---
+
 ## Features
 
 - **Inline completion** — predictive ghost text in any text field, accept with Tab.
@@ -22,6 +32,8 @@
 
 > **Cloud?** Wren includes a built-in model and runs fully on-device with zero configuration. An OpenAI-compatible endpoint (OpenAI, Ollama, or any provider) can be enabled manually in Settings → Completion → Model — this is **strictly opt-in**. The default, recommended path never touches the network.
 
+---
+
 ## Supported Languages
 
 Wren detects your writing language automatically (via Apple's `NLLanguageRecognizer`) and tailors grammar correction, fluency rewrites, and completion to the language family:
@@ -36,6 +48,8 @@ Wren detects your writing language automatically (via Apple's `NLLanguageRecogni
 
 Completions, grammar checks, and rewrites stay in your language — every prompt includes an explicit instruction to never translate. Language defaults to your macOS locale; no configuration needed. Override it per-preset or per custom rule in Settings.
 
+---
+
 ## Context-Aware Completions
 
 Most inline completion tools suggest generic text based only on what you typed so far. Wren goes further: it reads the content **above** your text field.
@@ -49,11 +63,15 @@ Key engineering details:
 - **Anti-feedback loop**: The input field is automatically cropped from the capture so the model never re-reads its own output.
 - **Optional**: Requires Screen Recording permission; degrades gracefully to text-only when not granted.
 
+---
+
 ## Permissions
 
 - **Accessibility** — to read the text field and insert completions.
 - **Input Monitoring** — for the global Tab intercept (CGEventTap).
 - **Screen Recording** (optional) — only if you enable on-screen context (Settings → Completion).
+
+---
 
 ## Architecture
 
@@ -80,6 +98,8 @@ Wren.app/
 5. **Overlay** — a borderless NSPanel floats ghost text at the caret position (first word bolded for partial-accept targeting).
 6. **Learning** — accepted completions feed into a variable-order n-gram store for instant future matches.
 
+---
+
 ## Build
 
 ```sh
@@ -97,15 +117,21 @@ git submodule update --init --recursive
 swift build
 ```
 
+---
+
 ## Sibling
 
 - [**Parrot**](https://github.com/thousandflowers/Parrot) — grammar & fluency correction for macOS.
+
+---
 
 ## Requirements
 
 - macOS 14.0+
 - Apple Silicon or Intel Mac
 - ~2 GB free RAM for the local model (shared with Parrot if both installed)
+
+---
 
 ## License
 
