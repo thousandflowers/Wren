@@ -3,3 +3,9 @@ Parrot.app/
 Wren.dmg
 .DS_Store
 .build/
+
+# Personal strategy/design notes — keep out of the public repo
+Wren - cose da fare.md
+Wren - competitive research.md
+Wren - creative insights.md
+Wren-FocusMode-Disegno.md

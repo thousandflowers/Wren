@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    # macos-15: mlx-swift-lm's manifest needs Swift tools 6.1 (Xcode 16.3+).
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Select latest Xcode
+        run: |
+          XCODE=$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)
+          echo "Using $XCODE"
+          sudo xcode-select -s "$XCODE"
+
+      - name: Install llama.cpp (CLlama system library header)
+        run: brew install llama.cpp || brew upgrade llama.cpp || true
+
+      # Wren compiles the shared `core` sources directly (no test target here;
+      # the Parrot repo runs the suite). This just proves the app builds.
+      - name: Build
+        run: swift build -v 2>&1
