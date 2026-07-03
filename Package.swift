@@ -17,6 +17,9 @@ let package = Package(
         .package(url: "https://github.com/sparkle-project/Sparkle", from: "2.6.0"),
         // MLX backend for the correction/chat path — 2-3× faster than llama.cpp on Apple Silicon.
         .package(url: "https://github.com/ml-explore/mlx-swift-lm", from: "3.31.3"),
+        // Pin the transitive mlx-swift: 0.31.5+ bumped to Swift tools 6.3, which the
+        // macOS 15 CI runner (Swift 6.2) can't parse. 0.31.4 matches core's lockfile.
+        .package(url: "https://github.com/ml-explore/mlx-swift", "0.31.4"..<"0.31.5"),
         // Hub download + tokenizer for MLX models (MLXHuggingFace macros expand to these).
         .package(url: "https://github.com/huggingface/swift-huggingface", from: "0.9.0"),
         .package(url: "https://github.com/huggingface/swift-transformers", from: "1.3.3"),
