@@ -4,7 +4,7 @@
 
 **Instant, on-device inline completion for every macOS app.** As you type, Wren suggests the next words in grey — press **Tab** to accept. It also fixes typos in the word you just typed. **Everything runs on your Mac by default; nothing leaves your machine.** Wren can optionally use an OpenAI-compatible API if you prefer a cloud model, but this is entirely opt-in — no setup, no cloud dependency out of the box.
 
-**No subscription. No account. No cloud. Just download and type.**
+**No subscription, no account, no cloud. Build from source for now — a release is coming.**
 
 ---
 
