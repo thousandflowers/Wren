@@ -105,19 +105,22 @@ Wren.app/
 ## Build
 
 ```sh
-./build.sh   # builds Wren.app from the shared core (latest main)
-```
-
-The shared code lives in the [`core`](https://github.com/thousandflowers/Parrot) submodule, which **tracks `main`**. `build.sh` runs `git submodule update --remote`, so **one commit to the core (Parrot repo) updates both Parrot and Wren** - no per-app pointer bump.
-
-### Manual build from source
-
-```sh
 git clone https://github.com/thousandflowers/Wren.git
 cd Wren
 git submodule update --init --recursive
-swift build
+brew install llama.cpp                      # libllama + ggml, bundled into the app
+MODEL_PATH=/path/to/model.gguf ./build.sh   # → Wren.app (self-contained: app + helper + model)
 ```
+
+`build.sh` runs `core/build-wren.sh`: it bundles `MODEL_PATH` (a small GGUF; the release uses `qwen2.5-0.5b-instruct-q4_k_m`) plus the llama.cpp dylibs, so the resulting `Wren.app` runs offline with no downloads. Pick a better model later in Settings → Completion → Model (`gemma-3-4b-pt` is the sweet spot on 16 GB).
+
+The shared code lives in the [`core`](https://github.com/thousandflowers/Parrot) submodule, pinned to a commit of Parrot's `main`. Bump the pointer (`git submodule update --remote core`) to pick up core changes; CI builds whatever is pinned.
+
+`swift build` alone compiles the sources (that is what CI checks) but does not produce an app bundle.
+
+### Releases
+
+Pushing a `v*` tag builds `Wren_<tag>.zip` + `.dmg` on GitHub Actions and attaches them to a GitHub Release. Builds are ad-hoc signed until a Developer ID is configured: right-click → Open on first launch.
 
 ---
 
@@ -130,8 +133,9 @@ swift build
 ## Requirements
 
 - macOS 14.0+
-- Apple Silicon or Intel Mac
-- ~2 GB free RAM for the local model (shared with Parrot if both installed)
+- Apple Silicon (the bundled inference helper links Homebrew's arm64 libllama)
+- The bundled llama.cpp/ggml dylibs come from Homebrew's bottle on the build machine, so a release built on the macOS 15 CI runner needs macOS 15+; a local build inherits your own macOS version
+- ~1 GB free RAM for the bundled model, ~3 GB for `gemma-3-4b` (weights are shared with Parrot if both are installed)
 
 ---
 

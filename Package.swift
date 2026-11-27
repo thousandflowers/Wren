@@ -36,6 +36,8 @@ let package = Package(
             dependencies: ["CLlama"],
             path: "core/CompletionHelper",
             linkerSettings: [
+                // ggml_backend_load_all_from_path lives in libggml (CLlama only links libllama).
+                .linkedLibrary("ggml"),
                 .unsafeFlags([
                     "-L/opt/homebrew/lib",
                     "-Xlinker", "-rpath", "-Xlinker", "@executable_path/../Frameworks",
@@ -91,6 +93,8 @@ let package = Package(
                 "Resources/MenuIcon@2x.png",
                 "Resources/MenuIcon.png",
                 "Resources/AppIcon.icns",
+                "Resources/WrenIcon.icns",
+                "LICENSE",
                 "build-wren.sh",
                 "Package.resolved",
             ],

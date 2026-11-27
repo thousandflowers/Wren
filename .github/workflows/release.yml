@@ -1,34 +1,63 @@
 name: Release
 
+# Triggered by pushing a version tag: git tag v0.1.0 && git push origin v0.1.0
+# Without APPLE_* secrets the build is ad-hoc signed: users right-click → Open on first launch.
 on:
   push:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build and Release
+    # macos-15: mlx-swift-lm's manifest needs Swift tools 6.1 (Xcode 16.3+).
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
-
-      - name: Build
+      - name: Select latest Xcode
         run: |
-          chmod +x build.sh
-          ./build.sh
+          XCODE=$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)
+          echo "Using $XCODE"
+          sudo xcode-select -s "$XCODE"
+
+      # CLlama's modulemap points at the Homebrew llama.h; build-wren.sh bundles its dylibs.
+      - name: Install llama.cpp (CLlama header + dylibs)
+        run: brew install llama.cpp || brew upgrade llama.cpp || true
+
+      # Wren ships self-contained: a small GGUF is bundled so the app runs offline out of the box.
+      - name: Fetch bundled model
+        run: |
+          mkdir -p /tmp/wren-model
+          curl -fL --retry 3 -o /tmp/wren-model/qwen2.5-0.5b-instruct-q4_k_m.gguf \
+            "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-q4_k_m.gguf"
+
+      - name: Build Wren.app + DMG
+        env:
+          WREN_DMG: "1"
+          MODEL_PATH: /tmp/wren-model/qwen2.5-0.5b-instruct-q4_k_m.gguf
+          APP_VERSION: ${{ github.ref_name }}
+        run: |
+          APP_VERSION="${APP_VERSION#v}" ./build.sh release
 
       - name: Package
         run: |
-          cp -R core/Wren.app Wren.app
-          zip -r Wren.zip Wren.app
+          ditto -c -k --keepParent Wren.app "Wren_${{ github.ref_name }}.zip"
+          mv core/Wren.dmg "Wren_${{ github.ref_name }}.dmg"
+          shasum -a 256 Wren_*.zip Wren_*.dmg | tee SHA256SUMS.txt
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        # Pinned to a commit SHA (v2 = 3bb12739) so a repointed tag cannot run arbitrary code here.
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
         with:
-          files: Wren.zip
+          name: "Wren ${{ github.ref_name }}"
           generate_release_notes: true
+          files: |
+            Wren_${{ github.ref_name }}.zip
+            Wren_${{ github.ref_name }}.dmg
+            SHA256SUMS.txt
